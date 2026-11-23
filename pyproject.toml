@@ -1,0 +1,28 @@
+[project]
+name = "am-at2-redes-neurais"
+version = "0.2.0"
+description = "API FastAPI com MLPClassifier para prever a faixa de preço de carros usados (UK)"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+
+dependencies = [
+    "fastapi[standard]>=0.115,<1.0",
+    "joblib>=1.4,<2.0",
+    "pandas>=2.2,<4.0",
+    "scikit-learn>=1.5,<2.0",
+    "uvicorn>=0.30,<1.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29,<8.0",
+    "matplotlib>=3.9,<4.0",
+    "pytest>=8.0,<9.0",
+    "seaborn>=0.13,<1.0",
+    "jupyter>=1.1,<2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"

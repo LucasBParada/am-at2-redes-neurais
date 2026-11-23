@@ -1,0 +1,101 @@
+### 1. Metadados do Serviço
+GET http://127.0.0.1:8000/diagnostico/modelo
+User-Agent: Tester-Audit-Agent
+Accept: application/json
+
+### 2. Predição com Perfil A (esperado: Economico)
+POST http://127.0.0.1:8000/predict
+User-Agent: Tester-Audit-Agent
+Content-Type: application/json
+
+{
+  "marca": "Vauxhall",
+  "quilometragem": 120000,
+  "ano_registro": 2007,
+  "numero_donos": 2,
+  "combustivel": "Petrol",
+  "carroceria": "Hatchback",
+  "motor_litros": 1.2,
+  "cambio": "Manual",
+  "portas": 5,
+  "assentos": 5,
+  "classe_emissao": "Euro 4",
+  "historico_completo": 0
+}
+
+### 3. Predição com Perfil B (esperado: Premium)
+POST http://127.0.0.1:8000/predict
+User-Agent: Tester-Audit-Agent
+Content-Type: application/json
+
+{
+  "marca": "BMW",
+  "quilometragem": 25000,
+  "ano_registro": 2019,
+  "numero_donos": 2,
+  "combustivel": "Diesel",
+  "carroceria": "Saloon",
+  "motor_litros": 2.0,
+  "cambio": "Automatic",
+  "portas": 5,
+  "assentos": 5,
+  "classe_emissao": "Euro 6",
+  "historico_completo": 1
+}
+
+### 4. Predição com Perfil C (esperado: Intermediario)
+POST http://127.0.0.1:8000/predict
+User-Agent: Tester-Audit-Agent
+Content-Type: application/json
+
+{
+  "marca": "Ford",
+  "quilometragem": 80000,
+  "ano_registro": 2012,
+  "combustivel": "Petrol",
+  "carroceria": "Hatchback",
+  "motor_litros": 1.6,
+  "cambio": "Manual",
+  "portas": 5,
+  "assentos": 5,
+  "classe_emissao": "Euro 5",
+  "historico_completo": 0
+}
+
+### 5. Entrada inválida: texto em campo numérico (esperado: 422)
+POST http://127.0.0.1:8000/predict
+User-Agent: Tester-Audit-Agent
+Content-Type: application/json
+
+{
+  "marca": "Ford",
+  "quilometragem": "muitos quilometros",
+  "ano_registro": 2012,
+  "combustivel": "Petrol",
+  "carroceria": "Hatchback",
+  "motor_litros": 1.6,
+  "cambio": "Manual",
+  "portas": 5,
+  "assentos": 5,
+  "classe_emissao": "Euro 5",
+  "historico_completo": 0
+}
+
+### 6. Entrada inválida: valor fora dos limites e categoria inexistente (esperado: 422)
+POST http://127.0.0.1:8000/predict
+User-Agent: Tester-Audit-Agent
+Content-Type: application/json
+
+{
+  "marca": "Ford",
+  "quilometragem": -500,
+  "ano_registro": 1850,
+  "combustivel": "Agua",
+  "carroceria": "Hatchback",
+  "motor_litros": 1.6,
+  "cambio": "Manual",
+  "portas": 5,
+  "assentos": 5,
+  "classe_emissao": "Euro 5",
+  "historico_completo": 0
+}
